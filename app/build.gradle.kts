@@ -53,12 +53,17 @@ android {
         keyPassword = releaseProps.getProperty("keyPassword")
     }
     packaging {
-        resources.excludes += setOf("META-INF/DEPENDENCIES", "META-INF/versions/9/OSGI-INF/MANIFEST.MF")
+        resources.excludes += setOf(
+            "META-INF/DEPENDENCIES", "META-INF/versions/9/OSGI-INF/MANIFEST.MF",
+            // Unused BouncyCastle data: post-quantum tables and certificate-path message bundles.
+            "org/bouncycastle/pqc/**", "org/bouncycastle/x509/CertPathReviewerMessages*", "org/bouncycastle/pkix/CertPathReviewerMessages*",
+        )
     }
     buildTypes {
         release {
             signingConfigs.findByName("release")?.let { signingConfig = it }
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
