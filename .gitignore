@@ -1,0 +1,19 @@
+# Build and local tooling
+.gradle/
+.gradle-user/
+.android-user/
+.kotlin/
+build/
+local.properties
+.idea/
+*.iml
+
+# Signing material: never commit
+keystore.properties
+*.jks
+*.keystore
+.debug/
+
+# Build outputs (published through GitHub Releases instead)
+*.apk
+*.aab
